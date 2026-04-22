@@ -155,13 +155,13 @@ export function AboutSection() {
                 </div>
                 <div className="space-y-3">
                   {[
-                    { name: "PIX - Competences numeriques", date: "2024", status: "Obtenu" },
-                    { name: "ANSSI - SecNumAcademie", date: "En cours", status: "En cours" }
+                    { name: "PIX - Competences numeriques", date: "28/03/2024", status: "Obtenu", score: "169 PIX" },
                   ].map((cert, i) => (
                     <div key={i} className="flex items-center justify-between p-3 border border-border/50 rounded-lg bg-card/30 hover:border-primary/30 transition-colors">
                       <div>
                         <p className="font-medium text-sm">{cert.name}</p>
                         <p className="text-xs text-muted-foreground">{cert.date}</p>
+                        {cert.score && <p className="text-xs text-primary font-mono mt-1">{cert.score}</p>}
                       </div>
                       <span className={`text-xs font-mono px-2 py-1 rounded ${cert.status === "Obtenu" ? "bg-primary/20 text-primary" : "bg-yellow-500/20 text-yellow-500"}`}>
                         {cert.status}
