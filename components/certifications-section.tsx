@@ -20,7 +20,7 @@ const certifications: {
     issuer: "PIX",
     date: "28/03/2024",
     score: "169 PIX",
-    image: "", // Add your PIX certificate image URL here
+    image: "/pix.png", // Add your PIX certificate image URL here
     verifyUrl: ""
   }
 ]

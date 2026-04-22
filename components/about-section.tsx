@@ -121,7 +121,7 @@ export function AboutSection() {
                 </div>
                 <div className="space-y-4">
                   {[
-                    { year: "2025-2027", title: "BTS SIO SISR", school: "Lycee Montalembert" },
+                    { year: "2025-2027", title: "BTS SIO SISR", school: "ESUP La Defense" },
                     { year: "2024-2025", title: "Licence STAPS", school: "Paris Nanterre" },
                     { year: "2023-2024", title: "Baccalaureat General", school: "Lycee Joliot Curie" }
                   ].map((edu, i) => (
