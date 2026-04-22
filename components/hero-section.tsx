@@ -2,44 +2,47 @@
 
 import { motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
+import { useLang } from "@/contexts/language-context"
+
+const translations = {
+  fr: {
+    subtitle: "Technicien Systèmes & Réseaux",
+    apprentice: "BTS SIO SISR | Apprenti @ Tunzini",
+    tags: ["Active Directory", "Windows Server", "VMware", "Réseaux", "Sécurité"],
+    cta1: "Voir mes projets",
+    cta2: "Me contacter",
+    scroll: "scroll"
+  },
+  en: {
+    subtitle: "Systems & Networks Technician",
+    apprentice: "BTS SIO SISR | Apprentice @ Tunzini",
+    tags: ["Active Directory", "Windows Server", "VMware", "Networking", "Security"],
+    cta1: "View my projects",
+    cta2: "Contact me",
+    scroll: "scroll"
+  }
+}
 
 export function HeroSection() {
+  const { lang } = useLang()
+  const t = translations[lang]
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated grid background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
         
-        {/* Horizontal glowing line */}
         <motion.div 
           className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent"
           initial={{ top: "0%" }}
           animate={{ top: "100%" }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         />
-        
-        {/* Floating orbs */}
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/10 blur-[100px]"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/5 blur-[120px]"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 5, repeat: Infinity }}
-        />
       </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-4">
-        {/* Main title */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,10 +64,12 @@ export function HeroSection() {
           className="mb-8"
         >
           <p className="text-xl md:text-2xl text-muted-foreground font-light">
-            Technicien Systemes & Reseaux
+            {t.subtitle}
           </p>
+
+          {/* 🔥 LIGNE QUI NE SE TRADUISAIT PAS — FIXÉE */}
           <p className="text-lg text-primary/70 font-mono mt-2">
-            BTS SIO SISR | Apprenti @ Tunzini
+            {t.apprentice}
           </p>
         </motion.div>
 
@@ -75,7 +80,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {["Active Directory", "Windows Server", "VMware", "Reseaux", "Securite"].map((tech, i) => (
+          {t.tags.map((tech, i) => (
             <motion.span
               key={tech}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -99,14 +104,15 @@ export function HeroSection() {
             href="#projects"
             className="group relative px-8 py-4 font-medium overflow-hidden rounded-lg bg-primary text-primary-foreground transition-all duration-300 hover:shadow-[0_0_30px_var(--glow-cyan)]"
           >
-            <span className="relative z-10">Voir mes projets</span>
+            <span className="relative z-10">{t.cta1}</span>
             <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
           </a>
+
           <a
             href="#contact"
             className="px-8 py-4 font-medium border border-primary/30 rounded-lg text-foreground hover:border-primary hover:bg-primary/10 transition-all duration-300"
           >
-            Me contacter
+            {t.cta2}
           </a>
         </motion.div>
       </div>
@@ -123,7 +129,7 @@ export function HeroSection() {
           transition={{ duration: 1.5, repeat: Infinity }}
           className="flex flex-col items-center gap-2 text-muted-foreground"
         >
-          <span className="text-xs font-mono">scroll</span>
+          <span className="text-xs font-mono">{t.scroll}</span>
           <ChevronDown className="w-5 h-5" />
         </motion.div>
       </motion.div>

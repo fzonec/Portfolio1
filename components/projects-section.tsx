@@ -3,31 +3,77 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import { useLang } from "@/contexts/language-context"
 import { Server, Network, ArrowRight } from "lucide-react"
 import Link from "next/link"
+
+// ─── Traductions FR/EN ─────────────────────────────────────────────
+const translations = {
+  fr: {
+    title: "Projets",
+    subtitle:
+      "Découvrez mes projets techniques réalisés dans le cadre de mon BTS SIO SISR.",
+    cta: "Voir le projet",
+    experienceTunzini: "EXPÉRIENCE TUNZINI",
+    supportInfrastructure: "Support Infrastructure",
+    competencesAcquises: "COMPÉTENCES ACQUISES",
+    maintenanceReparation: "Maintenance & Réparation",
+  },
+  en: {
+    title: "Projects",
+    subtitle:
+      "Explore my technical projects carried out as part of my BTS SIO SISR.",
+    cta: "View project",
+    experienceTunzini: "TUNZINI EXPERIENCE",
+    supportInfrastructure: "Infrastructure Support",
+    competencesAcquises: "ACQUIRED SKILLS",
+    maintenanceReparation: "Maintenance & Repair",
+  },
+} as const
 
 const projects = [
   {
     id: "active-directory",
-    title: "Active Directory",
-    category: "PROJET BTS SIO SISR",
-    description: "Installation et configuration complete d'un environnement Active Directory avec Windows Server 2019, gestion des utilisateurs, GPO et securite.",
+    title: {
+      fr: "Active Directory",
+      en: "Active Directory",
+    },
+    category: {
+      fr: "PROJET BTS SIO SISR",
+      en: "BTS SIO SISR PROJECT",
+    },
+    description: {
+      fr: "Installation et configuration complète d'un environnement Active Directory avec Windows Server 2019, gestion des utilisateurs, GPO et sécurité.",
+      en: "Complete installation and configuration of an Active Directory environment with Windows Server 2019, user management, GPOs and security.",
+    },
     icon: Server,
     tags: ["Windows Server", "AD DS", "GPO", "PowerShell"],
-    color: "from-primary to-primary/60"
+    color: "from-primary to-primary/60",
   },
   {
     id: "vlan-packet-tracer",
-    title: "VLAN Packet Tracer",
-    category: "PROJET RESEAU",
-    description: "Conception et deploiement d'une infrastructure reseau complete avec VLANs, routage inter-VLAN, serveurs DHCP/DNS et supervision SNMP.",
+    title: {
+      fr: "VLAN Packet Tracer",
+      en: "VLAN Packet Tracer",
+    },
+    category: {
+      fr: "PROJET RÉSEAU",
+      en: "NETWORK PROJECT",
+    },
+    description: {
+      fr: "Conception et déploiement d'une infrastructure réseau complète avec VLANs, routage inter-VLAN, serveurs DHCP/DNS et supervision SNMP.",
+      en: "Design and deployment of a complete network infrastructure with VLANs, inter-VLAN routing, DHCP/DNS servers and SNMP monitoring.",
+    },
     icon: Network,
     tags: ["Cisco", "VLAN", "Routage", "DHCP", "DNS"],
-    color: "from-chart-3 to-chart-3/60"
-  }
+    color: "from-chart-3 to-chart-3/60",
+  },
 ]
 
 export function ProjectsSection() {
+  const { lang } = useLang()
+  const t = translations[lang]
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -46,12 +92,10 @@ export function ProjectsSection() {
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-3xl md:text-4xl font-bold">Projets</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">{t.title}</h2>
             <div className="flex-1 h-[1px] bg-border max-w-xs" />
           </div>
-          <p className="text-muted-foreground max-w-xl">
-            Decouvrez mes projets techniques realises dans le cadre de mon BTS SIO SISR.
-          </p>
+          <p className="text-muted-foreground max-w-xl">{t.subtitle}</p>
         </motion.div>
 
         {/* Projects Grid */}
@@ -67,7 +111,7 @@ export function ProjectsSection() {
                 <div className="relative border border-border rounded-3xl bg-card/50 backdrop-blur-sm overflow-hidden hover:border-primary/50 transition-all duration-500 h-full">
                   {/* Glow effect on hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   {/* Header with icon */}
                   <div className="p-6 md:p-8">
                     <div className="flex items-start justify-between mb-4">
@@ -75,16 +119,16 @@ export function ProjectsSection() {
                         <project.icon className="w-6 h-6" />
                       </div>
                       <span className="inline-block px-3 py-1 text-xs font-mono text-primary bg-primary/10 rounded-full">
-                        {project.category}
+                        {project.category[lang]}
                       </span>
                     </div>
 
                     <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {project.title}
+                      {project.title[lang]}
                     </h3>
-                    
+
                     <p className="text-muted-foreground mb-6 line-clamp-2">
-                      {project.description}
+                      {project.description[lang]}
                     </p>
 
                     {/* Tags */}
@@ -101,7 +145,7 @@ export function ProjectsSection() {
 
                     {/* CTA */}
                     <div className="flex items-center gap-2 text-primary font-medium">
-                      <span>Voir le projet</span>
+                      <span>{t.cta}</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                     </div>
                   </div>
@@ -125,12 +169,12 @@ export function ProjectsSection() {
           className="mt-12 grid md:grid-cols-2 gap-6"
         >
           <div className="p-6 border border-border rounded-2xl bg-card/30 backdrop-blur-sm hover:border-primary/50 transition-colors">
-            <span className="text-xs font-mono text-primary">EXPERIENCE TUNZINI</span>
-            <h4 className="text-lg font-semibold mt-2 mb-3">Support Infrastructure</h4>
+            <span className="text-xs font-mono text-primary">{t.experienceTunzini}</span>
+            <h4 className="text-lg font-semibold mt-2 mb-3">{t.supportInfrastructure}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />
-                Configuration de postes et deploiement
+                Configuration de postes et déploiement
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />
@@ -144,20 +188,20 @@ export function ProjectsSection() {
           </div>
 
           <div className="p-6 border border-border rounded-2xl bg-card/30 backdrop-blur-sm hover:border-primary/50 transition-colors">
-            <span className="text-xs font-mono text-primary">COMPETENCES ACQUISES</span>
-            <h4 className="text-lg font-semibold mt-2 mb-3">Maintenance & Reparation</h4>
+            <span className="text-xs font-mono text-primary">{t.competencesAcquises}</span>
+            <h4 className="text-lg font-semibold mt-2 mb-3">{t.maintenanceReparation}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />
-                Diagnostic et reparation traceurs
+                Diagnostic et réparation traceurs
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />
-                Configuration telephonie IP
+                Configuration téléphonie IP
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />
-                Redaction procedures techniques
+                Rédaction procédures techniques
               </li>
             </ul>
           </div>

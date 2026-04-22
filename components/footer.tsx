@@ -2,8 +2,25 @@
 
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail } from "lucide-react"
+import { useLang } from "@/contexts/language-context"
+
+
+// ─── Traductions FR/EN ─────────────────────────────────────────────
+const translations = {
+  fr: {
+    copyright: "© 2026 Mohamed Hemamda — Tous droits réservés",
+    techStack: "Construit avec Next.js & Tailwind",
+  },
+  en: {
+    copyright: "© 2026 Mohamed Hemamda — All rights reserved",
+    techStack: "Built with Next.js & Tailwind",
+  },
+} as const
 
 export function Footer() {
+  const { lang } = useLang()
+  const t = translations[lang]
+
   return (
     <footer className="relative py-12 border-t border-border">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -16,7 +33,7 @@ export function Footer() {
               <span className="text-primary">/&gt;</span>
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              BTS SIO SISR | 2025-2027
+              <span className="text-primary">BTS SIO SISR | 2025-2027</span>
             </p>
           </div>
 
@@ -54,7 +71,7 @@ export function Footer() {
 
           {/* Tech stack */}
           <p className="text-xs text-muted-foreground font-mono">
-            Built with Next.js & Tailwind
+            {t.techStack}
           </p>
         </div>
 

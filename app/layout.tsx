@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CometCursor } from '@/components/comet-cursor'
+import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/contexts/language-context"
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({ 
@@ -43,11 +45,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className="bg-background">
+    <html lang="fr" suppressHydrationWarning>
       <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <CometCursor />
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="dark" 
+          enableSystem={false}
+          disableTransitionOnChange
+          storageKey="portfolio-theme"
+        >
+          <LanguageProvider>
+            <CometCursor />
+            {children}
+            {process.env.NODE_ENV === 'production' && <Analytics />}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -3,37 +3,52 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
+import { useLang } from "@/contexts/language-context"
 import { Award, ExternalLink, X, ZoomIn } from "lucide-react"
 import Image from "next/image"
 
-// Certifications data - add your certifications here
-const certifications: {
-  name: string
-  issuer: string
-  date: string
-  score?: string
-  image?: string
-  verifyUrl?: string
-}[] = [
+// ─── Traductions FR/EN ─────────────────────────────────────────────
+const translations = {
+  fr: {
+    title: "Certifications",
+    subtitle: "Mes certifications professionnelles attestant de mes compétences techniques.",
+    comingSoon: "Plus de certifications à venir",
+    imageComing: "Image à venir",
+    verify: "Vérifier le certificat"
+  },
+  en: {
+    title: "Certifications",
+    subtitle: "My professional certifications demonstrating my technical skills.",
+    comingSoon: "More certifications coming soon",
+    imageComing: "Image coming soon",
+    verify: "Verify certificate"
+  }
+} as const
+
+// Certifications data
+const certifications = [
   {
-    name: "Competences numeriques",
+    name: "Compétences numériques",
     issuer: "PIX",
     date: "28/03/2024",
     score: "169 PIX",
-    image: "/pix.png", // Add your PIX certificate image URL here
+    image: "pix.png",
     verifyUrl: ""
   }
 ]
 
 export function CertificationsSection() {
+  const { lang } = useLang()
+  const t = translations[lang]
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [selectedCert, setSelectedCert] = useState<typeof certifications[0] | null>(null)
+  const [selectedCert, setSelectedCert] = useState(null)
 
   return (
     <>
       <section id="certifications" className="relative py-32 overflow-hidden">
-        {/* Background elements */}
+        {/* Background */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,var(--glow-cyan),transparent_50%)]" />
 
@@ -46,12 +61,10 @@ export function CertificationsSection() {
             className="mb-16"
           >
             <div className="flex items-center gap-4 mb-4">
-              <h2 className="text-3xl md:text-4xl font-bold">Certifications</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">{t.title}</h2>
               <div className="flex-1 h-[1px] bg-border max-w-xs" />
             </div>
-            <p className="text-muted-foreground max-w-2xl">
-              Mes certifications professionnelles attestant de mes competences techniques.
-            </p>
+            <p className="text-muted-foreground max-w-2xl">{t.subtitle}</p>
           </motion.div>
 
           {/* Certifications grid */}
@@ -65,15 +78,10 @@ export function CertificationsSection() {
                 className="group relative"
               >
                 <div className="relative border border-border rounded-2xl bg-card/50 backdrop-blur-sm overflow-hidden hover:border-primary/50 transition-all duration-300">
-                  {/* Corner decorations */}
-                  <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-primary opacity-0 group-hover:opacity-100 transition-opacity -translate-x-[1px] -translate-y-[1px] z-10" />
-                  <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-primary opacity-0 group-hover:opacity-100 transition-opacity translate-x-[1px] -translate-y-[1px] z-10" />
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-primary opacity-0 group-hover:opacity-100 transition-opacity -translate-x-[1px] translate-y-[1px] z-10" />
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-primary opacity-0 group-hover:opacity-100 transition-opacity translate-x-[1px] translate-y-[1px] z-10" />
-
-                  {/* Certificate image */}
+                  
+                  {/* Image */}
                   {cert.image ? (
-                    <div 
+                    <div
                       className="relative aspect-[4/3] bg-secondary/30 cursor-pointer overflow-hidden"
                       onClick={() => setSelectedCert(cert)}
                     >
@@ -91,39 +99,36 @@ export function CertificationsSection() {
                     <div className="aspect-[4/3] bg-secondary/30 flex items-center justify-center">
                       <div className="text-center p-6">
                         <Award className="w-12 h-12 text-primary/50 mx-auto mb-3" />
-                        <p className="text-sm text-muted-foreground">Image a venir</p>
+                        <p className="text-sm text-muted-foreground">{t.imageComing}</p>
                       </div>
                     </div>
                   )}
 
-                  {/* Certificate info */}
+                  {/* Info */}
                   <div className="p-5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-xs font-mono text-primary mb-1">{cert.issuer}</p>
-                        <h3 className="font-semibold text-lg leading-tight">{cert.name}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">{cert.date}</p>
-                        {cert.score && (
-                          <p className="text-sm font-mono text-primary mt-2">{cert.score}</p>
-                        )}
-                      </div>
-                      {cert.verifyUrl && (
-                        <a
-                          href={cert.verifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 border border-border rounded-lg hover:border-primary/50 hover:bg-primary/5 transition-colors"
-                        >
-                          <ExternalLink className="w-4 h-4 text-primary" />
-                        </a>
-                      )}
-                    </div>
+                    <p className="text-xs font-mono text-primary mb-1">{cert.issuer}</p>
+                    <h3 className="font-semibold text-lg leading-tight">{cert.name}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{cert.date}</p>
+                    {cert.score && (
+                      <p className="text-sm font-mono text-primary mt-2">{cert.score}</p>
+                    )}
+
+                    {cert.verifyUrl && (
+                      <a
+                        href={cert.verifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 border border-border rounded-lg hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4 text-primary" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
 
-            {/* Placeholder for future certifications */}
+            {/* Placeholder */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -135,7 +140,7 @@ export function CertificationsSection() {
                   <div className="w-12 h-12 rounded-full border-2 border-dashed border-primary/30 flex items-center justify-center mx-auto mb-3">
                     <span className="text-2xl text-primary/50">+</span>
                   </div>
-                  <p className="text-sm text-muted-foreground">Plus de certifications a venir</p>
+                  <p className="text-sm text-muted-foreground">{t.comingSoon}</p>
                 </div>
               </div>
             </motion.div>
@@ -143,12 +148,11 @@ export function CertificationsSection() {
         </div>
       </section>
 
-      {/* Lightbox modal */}
+      {/* Lightbox */}
       {selectedCert && selectedCert.image && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md flex items-center justify-center p-4"
           onClick={() => setSelectedCert(null)}
         >
@@ -158,7 +162,7 @@ export function CertificationsSection() {
           >
             <X className="w-6 h-6" />
           </button>
-          
+
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -173,13 +177,16 @@ export function CertificationsSection() {
                 className="object-contain bg-card"
               />
             </div>
+
             <div className="mt-4 text-center">
               <p className="text-xs font-mono text-primary">{selectedCert.issuer}</p>
               <h3 className="font-semibold text-xl">{selectedCert.name}</h3>
               <p className="text-muted-foreground">{selectedCert.date}</p>
+
               {selectedCert.score && (
                 <p className="text-primary font-mono mt-1">{selectedCert.score}</p>
               )}
+
               {selectedCert.verifyUrl && (
                 <a
                   href={selectedCert.verifyUrl}
@@ -188,7 +195,7 @@ export function CertificationsSection() {
                   className="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-primary rounded-lg text-primary hover:bg-primary/10 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Verifier le certificat
+                  {t.verify}
                 </a>
               )}
             </div>

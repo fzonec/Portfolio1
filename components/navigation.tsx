@@ -2,19 +2,32 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useLang } from "@/contexts/language-context"
 
-const navItems = [
-  { label: "A propos", href: "#about" },
-  { label: "Competences", href: "#skills" },
-  { label: "Certifications", href: "#certifications" },
-  { label: "Projets", href: "#projects" },
-  { label: "Contact", href: "#contact" }
-]
+const navItems = {
+  fr: [
+    { label: "A propos", href: "#about" },
+    { label: "Competences", href: "#skills" },
+    { label: "Certifications", href: "#certifications" },
+    { label: "Projets", href: "#projects" },
+    { label: "Contact", href: "#contact" }
+  ],
+  en: [
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Certifications", href: "#certifications" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" }
+  ]
+}
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const { lang, setLang } = useLang()
   const { scrollY } = useScroll()
   const opacity = useTransform(scrollY, [0, 100], [0, 1])
 
@@ -53,7 +66,7 @@ export function Navigation() {
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item, i) => (
+              {navItems[lang].map((item, i) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -64,6 +77,24 @@ export function Navigation() {
                   <span className="absolute bottom-0 left-4 right-4 h-[1px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                 </a>
               ))}
+            </div>
+
+            <div className="flex items-center gap-2">
+              {/* Language toggle */}
+              <button
+                onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+                className="p-2 text-foreground hover:text-primary transition-colors font-mono text-sm font-bold"
+              >
+                {lang === "fr" ? "EN" : "FR"}
+              </button>
+
+              {/* Theme toggle */}
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2 text-foreground hover:text-primary transition-colors"
+              >
+                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -90,7 +121,7 @@ export function Navigation() {
       >
         <div className="absolute inset-0 bg-background/95 backdrop-blur-lg" />
         <nav className="relative flex flex-col items-center justify-center h-full gap-8">
-          {navItems.map((item, i) => (
+          {navItems[lang].map((item, i) => (
             <a
               key={item.href}
               href={item.href}
