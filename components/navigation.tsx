@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 const navItems = [
   { label: "A propos", href: "#about" },
   { label: "Competences", href: "#skills" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Projets", href: "#projects" },
   { label: "Contact", href: "#contact" }
 ]
@@ -63,12 +64,6 @@ export function Navigation() {
                   <span className="absolute bottom-0 left-4 right-4 h-[1px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                 </a>
               ))}
-              <a
-                href="#contact"
-                className="ml-4 px-5 py-2 text-sm font-medium border border-primary text-primary rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-              >
-                CV
-              </a>
             </div>
 
             {/* Mobile menu button */}
@@ -106,13 +101,6 @@ export function Navigation() {
               {item.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setIsOpen(false)}
-            className="mt-4 px-8 py-3 text-lg font-medium border border-primary text-primary rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-          >
-            Telecharger CV
-          </a>
         </nav>
       </motion.div>
     </>

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { MapPin, Mail, GraduationCap, Briefcase, Languages, Award } from "lucide-react"
+import { MapPin, Mail, GraduationCap, Briefcase, Languages } from "lucide-react"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -147,29 +147,6 @@ export function AboutSection() {
                 <p className="text-sm text-muted-foreground mt-1">Depuis janvier 2026</p>
               </div>
 
-              {/* Certifications */}
-              <div className="p-6 border border-border rounded-2xl bg-card/50 backdrop-blur-sm">
-                <div className="flex items-center gap-3 mb-4">
-                  <Award className="w-5 h-5 text-primary" />
-                  <h3 className="font-semibold">Certifications</h3>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    { name: "PIX - Competences numeriques", date: "28/03/2024", status: "Obtenu", score: "169 PIX" },
-                  ].map((cert, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 border border-border/50 rounded-lg bg-card/30 hover:border-primary/30 transition-colors">
-                      <div>
-                        <p className="font-medium text-sm">{cert.name}</p>
-                        <p className="text-xs text-muted-foreground">{cert.date}</p>
-                        {cert.score && <p className="text-xs text-primary font-mono mt-1">{cert.score}</p>}
-                      </div>
-                      <span className={`text-xs font-mono px-2 py-1 rounded ${cert.status === "Obtenu" ? "bg-primary/20 text-primary" : "bg-yellow-500/20 text-yellow-500"}`}>
-                        {cert.status}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </motion.div>
           </div>
         </motion.div>
