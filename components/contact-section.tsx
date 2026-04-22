@@ -24,8 +24,7 @@ export function ContactSection() {
         >
           {/* Section header */}
           <div className="mb-8">
-            <span className="font-mono text-primary text-sm">04. Contact</span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4">
+            <h2 className="text-4xl md:text-5xl font-bold">
               Travaillons ensemble
             </h2>
             <p className="text-muted-foreground mt-4 max-w-xl mx-auto">

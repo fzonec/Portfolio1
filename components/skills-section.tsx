@@ -86,7 +86,6 @@ export function SkillsSection() {
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-primary text-sm">02.</span>
             <h2 className="text-3xl md:text-4xl font-bold">Competences</h2>
             <div className="flex-1 h-[1px] bg-border max-w-xs" />
           </div>

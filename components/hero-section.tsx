@@ -39,17 +39,6 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4">
-        {/* Terminal-style intro */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-primary/30 rounded-full bg-card/50 backdrop-blur-sm"
-        >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="font-mono text-sm text-primary">system.init()</span>
-        </motion.div>
-
         {/* Main title */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

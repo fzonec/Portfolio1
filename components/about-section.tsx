@@ -37,7 +37,6 @@ export function AboutSection() {
           {/* Section header */}
           <motion.div variants={fadeInUp} className="mb-16">
             <div className="flex items-center gap-4 mb-4">
-              <span className="font-mono text-primary text-sm">01.</span>
               <h2 className="text-3xl md:text-4xl font-bold">A propos</h2>
               <div className="flex-1 h-[1px] bg-border max-w-xs" />
             </div>

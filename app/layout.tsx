@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { CometCursor } from '@/components/comet-cursor'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({ 
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="bg-background">
       <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <CometCursor />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
