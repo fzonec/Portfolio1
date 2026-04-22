@@ -53,7 +53,28 @@ const projectDetails = {
   }
 }
 
-const screenshots: { src: string; alt: string; caption: string }[] = []
+const screenshots: { src: string; alt: string; caption: string }[] = [
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-yh74fdndhiINm5XvPYjSVsddRJHx1R.png",
+    alt: "Bureau Windows Server 2019",
+    caption: "Bureau Windows Server 2019 - Environnement de travail du serveur SRV-AD"
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-P2CgGNr6jERhQwV2OEcMBS1dz8JP0o.png",
+    alt: "Gestionnaire de serveur",
+    caption: "Gestionnaire de serveur - Proprietes du serveur SRV-AD (192.168.1.10, domaine esup.local)"
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5SUBv7FRxqE2Qim4Fe5KwTvYec8Vb4.png",
+    alt: "Active Directory Users and Computers",
+    caption: "Console ADUC - Structure des OU: Comptabilite, Direction, Etudiants, Informatique"
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-GaB6yrPsm6Rkn8DIvIL4iNl2GubUcd.png",
+    alt: "Gestion des strategies de groupe",
+    caption: "Console GPMC - GPO configurees: Default Domain Policy, GPO-MotDePasse, GPO-Verrouillage"
+  }
+]
 
 export default function ActiveDirectoryProject() {
   const [activeTab, setActiveTab] = useState<keyof typeof projectDetails>("overview")
@@ -189,8 +210,7 @@ export default function ActiveDirectoryProject() {
       </section>
 
       {/* Screenshots Section */}
-      {screenshots.length > 0 && (
-        <section className="py-16">
+      <section className="py-16">
           <div className="container mx-auto px-4 max-w-6xl">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -224,27 +244,7 @@ export default function ActiveDirectoryProject() {
             </motion.div>
           </div>
         </section>
-      )}
 
-      {/* Placeholder for screenshots */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="p-8 border border-dashed border-border rounded-3xl text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
-              <Server className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Captures d&apos;ecran</h3>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Ajoutez vos captures d&apos;ecran du projet Active Directory pour les afficher ici.
-            </p>
-          </motion.div>
-        </div>
-      </section>
     </main>
   )
 }
