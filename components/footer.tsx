@@ -23,7 +23,7 @@ export function Footer() {
   return (
     <footer className="relative py-12 border-t border-border">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12">
           {/* Logo and copyright */}
           <div className="text-center md:text-left">
             <p className="font-mono text-sm text-muted-foreground">
@@ -69,9 +69,7 @@ export function Footer() {
           </div>
 
           {/* Tech stack */}
-          <p className="text-xs text-muted-foreground font-mono">
-            {t.techStack}
-          </p>
+          
         </div>
 
         {/* Decorative line */}

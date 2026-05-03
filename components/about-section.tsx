@@ -21,11 +21,10 @@ const stagger = {
 const translations = {
   fr: {
     title: "A propos",
-    bio1: <>Actuellement etudiant en 1ere annee de <span className="text-primary">BTS SIO option SISR</span>, apprenti chez <span className="text-primary">Tunzini</span> depuis janvier 2026. Passionne par l&apos;administration systemes et reseaux, je realise des missions operationnelles de support et d&apos;infrastructure.</>,
-    bio2: "Rigoureux, autonome et oriente service utilisateur, je cherche a consolider mes competences techniques pour evoluer vers des postes d'administrateur systemes et reseaux.",
+    bio1: <>Actuellement en train de préparer en diplôme de 2 année en  <span className="text-primary">BTS SIO option SISR</span>, et apprenti chez <span className="text-primary">Tunzini</span> depuis janvier 2026. Passionne par l&apos;administration systemes et reseaux, je realise des missions operationnelles de support et d&apos;infrastructure.</>,
     location: "Localisation",
     email: "Email",
-    emailValue: "Contact disponible",
+    emailValue: "mohamed.hemamda017@gmail.com",
     languagesTitle: "Langues",
     languages: [
       { lang: "Francais", level: "C2", percent: 100 },
