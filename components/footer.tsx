@@ -60,7 +60,7 @@ export function Footer() {
               <Linkedin className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="mailto:contact@example.com"
+              href="mailto:mohamed.hemamda017@gmail.com"
               whileHover={{ y: -2 }}
               className="p-2 text-muted-foreground hover:text-primary transition-colors"
               aria-label="Email"
