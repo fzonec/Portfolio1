@@ -340,7 +340,7 @@ export default function VLANProject() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="text-2xl font-bold mb-8">Livrables attendus</h2>
+         
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
               
