@@ -206,7 +206,7 @@ export default function ActiveDirectoryProject() {
                     <p><span className="text-primary">PS C:\&gt;</span> Get-ADDomain</p>
                     <p className="text-muted-foreground">Name: esup</p>
                     <p className="text-muted-foreground">DNSRoot: esup.local</p>
-                    <p className="text-muted-foreground">DomainMode: Windows2016Domain</p>
+                    <p className="text-muted-foreground">DomainMode: Windows2019Domain</p>
                   </div>
                 </div>
               </div>
