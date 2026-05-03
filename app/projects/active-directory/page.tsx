@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowLeft, Server, Users, Shield, Settings, ChevronRight, ExternalLink } from "lucide-react"
+import { ArrowLeft, Server, Users, Shield, Settings, ChevronRight, ZoomIn } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from "next/image"
@@ -78,17 +78,37 @@ const screenshots: { src: string; alt: string; caption: string }[] = [
 
 export default function ActiveDirectoryProject() {
   const [activeTab, setActiveTab] = useState<keyof typeof projectDetails>("overview")
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null)
 
   return (
     <main className="min-h-screen bg-background">
+
+      {/* Zoom modal */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center cursor-zoom-out"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div className="relative max-w-5xl max-h-[90vh] w-full mx-4">
+            <Image
+              src={zoomedImage}
+              alt="Zoom"
+              width={1200}
+              height={800}
+              className="object-contain rounded-xl max-h-[90vh] w-full"
+            />
+          </div>
+        </div>
+      )}
+
       {/* Hero */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--glow-cyan),transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
-        
+
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
-          <Link 
-            href="/#projects" 
+          <Link
+            href="/#projects"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -105,7 +125,7 @@ export default function ActiveDirectoryProject() {
             </span>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">Active Directory</h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
-              Installation et configuration complete d&apos;un environnement Active Directory 
+              Installation et configuration complete d&apos;un environnement Active Directory
               avec Windows Server 2019, gestion des utilisateurs, GPO et securite.
             </p>
           </motion.div>
@@ -121,7 +141,6 @@ export default function ActiveDirectoryProject() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative border border-border rounded-3xl bg-card/50 backdrop-blur-sm overflow-hidden"
           >
-            {/* Content */}
             <div className="grid md:grid-cols-[280px_1fr]">
               {/* Tabs */}
               <div className="border-b md:border-b-0 md:border-r border-border p-4">
@@ -195,55 +214,53 @@ export default function ActiveDirectoryProject() {
 
             {/* Footer */}
             <div className="p-6 md:p-8 border-t border-border bg-secondary/20">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span>Services: AD DS, DNS, Netlogon, KDC</span>
-                </div>
-                <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
-                  Telecharger le rapport complet
-                  <ExternalLink className="w-4 h-4" />
-                </button>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <span>Services: AD DS, DNS, Netlogon, KDC</span>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Screenshots Section */}
+      {/* Screenshots avec zoom */}
       <section className="py-16">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <h2 className="text-2xl font-bold mb-8">Captures d&apos;ecran</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {screenshots.map((screenshot, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    className="group relative rounded-2xl overflow-hidden border border-border bg-card/50"
-                  >
-                    <div className="aspect-video relative">
-                      <Image
-                        src={screenshot.src}
-                        alt={screenshot.alt}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+        <div className="container mx-auto px-4 max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <h2 className="text-2xl font-bold mb-8">Captures d&apos;ecran</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {screenshots.map((screenshot, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                  className="group relative rounded-2xl overflow-hidden border border-border bg-card/50 cursor-zoom-in"
+                  onClick={() => setZoomedImage(screenshot.src)}
+                >
+                  <div className="aspect-video relative">
+                    <Image
+                      src={screenshot.src}
+                      alt={screenshot.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                      <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
-                    <div className="p-4 border-t border-border">
-                      <p className="text-sm text-muted-foreground">{screenshot.caption}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
+                  </div>
+                  <div className="p-4 border-t border-border">
+                    <p className="text-sm text-muted-foreground">{screenshot.caption}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
     </main>
   )
