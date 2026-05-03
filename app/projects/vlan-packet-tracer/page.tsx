@@ -332,8 +332,8 @@ export default function VLANProject() {
         </section>
       )}
 
-      {/* Livrables */}
-      <section className="py-16 border-t border-border">
+      /{/* Livrables */}
+      /<section className="py-16 border-t border-border">
         <div className="container mx-auto px-4 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -343,12 +343,7 @@ export default function VLANProject() {
             <h2 className="text-2xl font-bold mb-8">Livrables attendus</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "Schema reseau annote (PDF/PNG)",
-                "Fichier .pkt Packet Tracer",
-                "Tableau d'adressage IP",
-                "Guide de configuration",
-                "Procedures de depannage",
-                "Rapports d'incidents"
+              
               ].map((item, i) => (
                 <motion.div
                   key={i}
