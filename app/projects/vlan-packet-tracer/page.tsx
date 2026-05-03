@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowLeft, Network, Server, Shield, Settings, ChevronRight, ExternalLink, Wifi, MonitorSpeaker } from "lucide-react"
+import { ArrowLeft, Network, Server, Shield, Settings, ChevronRight, ExternalLink, Wifi, MonitorSpeaker, ZoomIn } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from "next/image"
@@ -36,7 +36,7 @@ const projectDetails = {
       "VLAN 10 - Accueil",
       "VLAN 20 - Gestion",
       "VLAN 30 - RH",
-      "VLAN 40 - Finances", 
+      "VLAN 40 - Finances",
       "VLAN 50 - IT",
       "Trunks entre equipements"
     ]
@@ -73,34 +73,59 @@ const levels = [
     duration: "6-7 heures"
   },
   {
-    level: "Intermediaire", 
+    level: "Intermediaire",
     context: "Societe StratAdvise",
     objectives: ["3 VLANs (RH, Finances, IT)", "Serveurs DHCP/DNS/HTTP", "SNMP supervision", "ACLs"],
     duration: "8-9 heures"
   },
-  #{
-  #  level: "Expert",
-  # context: "PME NeoEdu",
-  #objectives: ["Multi-sites WAN", "Haute disponibilite", "Automatisation scripts", "SNMP/Syslog avance"],
-  #duration: "10 heures"
-  #}
+  // {
+  //   level: "Expert",
+  //   context: "PME NeoEdu",
+  //   objectives: ["Multi-sites WAN", "Haute disponibilite", "Automatisation scripts", "SNMP/Syslog avance"],
+  //   duration: "10 heures"
+  // }
 ]
 
-const screenshots: { src: string; alt: string; caption: string }[] = []
+// ✅ AJOUTEZ VOS CAPTURES D'ÉCRAN ICI
+// Exemple : { src: "/screenshots/vlan1.png", alt: "Description", caption: "Légende" }
+const screenshots: { src: string; alt: string; caption: string }[] = [
+  // { src: "/screenshots/vlan1.png", alt: "Topologie réseau", caption: "Vue de la topologie complète" },
+  // { src: "/screenshots/vlan2.png", alt: "Configuration VLAN", caption: "Configuration des VLANs" },
+]
 
 export default function VLANProject() {
   const [activeTab, setActiveTab] = useState<keyof typeof projectDetails>("overview")
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null)
 
   return (
     <main className="min-h-screen bg-background">
+
+      {/* Zoom modal */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center cursor-zoom-out"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div className="relative max-w-5xl max-h-[90vh] w-full mx-4">
+            <Image
+              src={zoomedImage}
+              alt="Zoom"
+              width={1200}
+              height={800}
+              className="object-contain rounded-xl max-h-[90vh] w-full"
+            />
+          </div>
+        </div>
+      )}
+
       {/* Hero */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--glow-cyan),transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
-        
+
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
-          <Link 
-            href="/#projects" 
+          <Link
+            href="/#projects"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -117,7 +142,7 @@ export default function VLANProject() {
             </span>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">VLAN Packet Tracer</h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
-              Conception et deploiement d&apos;une infrastructure reseau complete avec VLANs, 
+              Conception et deploiement d&apos;une infrastructure reseau complete avec VLANs,
               routage inter-VLAN, serveurs DHCP/DNS et supervision SNMP sur Cisco Packet Tracer.
             </p>
           </motion.div>
@@ -133,7 +158,7 @@ export default function VLANProject() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <h2 className="text-2xl font-bold mb-8">Niveaux de difficulte</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               {levels.map((item, index) => (
                 <motion.div
                   key={item.level}
@@ -145,8 +170,7 @@ export default function VLANProject() {
                   <div className="flex items-center justify-between mb-4">
                     <span className={`px-3 py-1 text-xs font-mono rounded-full ${
                       index === 0 ? "bg-chart-3/20 text-chart-3" :
-                      index === 1 ? "bg-chart-4/20 text-chart-4" :
-                      "bg-chart-5/20 text-chart-5"
+                      "bg-chart-4/20 text-chart-4"
                     }`}>
                       {item.level}
                     </span>
@@ -177,7 +201,6 @@ export default function VLANProject() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative border border-border rounded-3xl bg-card/50 backdrop-blur-sm overflow-hidden"
           >
-            {/* Content */}
             <div className="grid md:grid-cols-[280px_1fr]">
               {/* Tabs */}
               <div className="border-b md:border-b-0 md:border-r border-border p-4">
@@ -251,16 +274,15 @@ export default function VLANProject() {
               </div>
             </div>
 
-            {/* Footer */}
+            {/* Footer vide */}
             <div className="p-6 md:p-8 border-t border-border bg-secondary/20">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-              </div>
+              <div className="flex flex-wrap items-center justify-between gap-4" />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Screenshots Section */}
+      {/* Screenshots avec zoom */}
       {screenshots.length > 0 && (
         <section className="py-16">
           <div className="container mx-auto px-4 max-w-6xl">
@@ -277,7 +299,8 @@ export default function VLANProject() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    className="group relative rounded-2xl overflow-hidden border border-border bg-card/50"
+                    className="group relative rounded-2xl overflow-hidden border border-border bg-card/50 cursor-zoom-in"
+                    onClick={() => setZoomedImage(screenshot.src)}
                   >
                     <div className="aspect-video relative">
                       <Image
@@ -286,6 +309,9 @@ export default function VLANProject() {
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                        <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
                     </div>
                     <div className="p-4 border-t border-border">
                       <p className="text-sm text-muted-foreground">{screenshot.caption}</p>
@@ -297,26 +323,6 @@ export default function VLANProject() {
           </div>
         </section>
       )}
-
-      {/* Placeholder for screenshots */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="p-8 border border-dashed border-border rounded-3xl text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-chart-3/10 flex items-center justify-center">
-              <Network className="w-8 h-8 text-chart-3" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Captures d&apos;ecran</h3>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Ajoutez vos captures d&apos;ecran du projet VLAN Packet Tracer pour les afficher ici.
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Livrables */}
       <section className="py-16 border-t border-border">
