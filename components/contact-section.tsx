@@ -100,7 +100,7 @@ export function ContactSection() {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:contact@example.com"
+                href="mailto:mohamed.hemamda017@gmail.com"
                 className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 font-medium overflow-hidden rounded-xl bg-primary text-primary-foreground transition-all duration-300 hover:shadow-[0_0_40px_var(--glow-cyan)]"
               >
                 <span className="relative z-10">{t.cta}</span>

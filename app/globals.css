@@ -14,7 +14,7 @@
   --popover-foreground: oklch(0.1 0.02 260);
   --primary: oklch(0.55 0.2 195);
   --primary-foreground: oklch(0.97 0 0);
-  --secondary: oklch(0.88 0.01 260);
+  --secondary: oklch(89.27% 0.01088 190.327);
   --secondary-foreground: oklch(0.1 0.02 260);
   --muted: oklch(0.88 0.01 260);
   --muted-foreground: oklch(0.45 0.02 260);
@@ -206,4 +206,7 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--neon-cyan);
+}
+html {
+  font-size: 22px; /* 112% */
 }
