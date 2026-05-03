@@ -50,7 +50,7 @@ const translations = {
     bio2: "Rigorous, autonomous and user-oriented, I am looking to consolidate my technical skills to move towards systems and network administrator positions.",
     location: "Location",
     email: "Email",
-    emailValue: "Contact available",
+    emailValue: "Contact available : mohamed.hemamda017@gmail.com",
     languagesTitle: "Languages",
     languages: [
       { lang: "French", level: "C2", percent: 100 },

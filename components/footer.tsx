@@ -9,7 +9,6 @@ import { useLang } from "@/contexts/language-context"
 const translations = {
   fr: {
     copyright: "© 2026 Mohamed Hemamda — Tous droits réservés",
-    techStack: "Construit avec Next.js & Tailwind",
   },
   en: {
     copyright: "© 2026 Mohamed Hemamda — All rights reserved",
@@ -40,7 +39,7 @@ export function Footer() {
           {/* Social links */}
           <div className="flex items-center gap-4">
             <motion.a
-              href="https://github.com"
+              href="https://github.com/fzonec"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2 }}
@@ -50,7 +49,7 @@ export function Footer() {
               <Github className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/mohamed-h-7b102032a"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2 }}

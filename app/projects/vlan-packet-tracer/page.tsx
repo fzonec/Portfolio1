@@ -78,12 +78,12 @@ const levels = [
     objectives: ["3 VLANs (RH, Finances, IT)", "Serveurs DHCP/DNS/HTTP", "SNMP supervision", "ACLs"],
     duration: "8-9 heures"
   },
-  {
-    level: "Expert",
-    context: "PME NeoEdu",
-    objectives: ["Multi-sites WAN", "Haute disponibilite", "Automatisation scripts", "SNMP/Syslog avance"],
-    duration: "10 heures"
-  }
+  #{
+  #  level: "Expert",
+  # context: "PME NeoEdu",
+  #objectives: ["Multi-sites WAN", "Haute disponibilite", "Automatisation scripts", "SNMP/Syslog avance"],
+  #duration: "10 heures"
+  #}
 ]
 
 const screenshots: { src: string; alt: string; caption: string }[] = []
@@ -254,13 +254,6 @@ export default function VLANProject() {
             {/* Footer */}
             <div className="p-6 md:p-8 border-t border-border bg-secondary/20">
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span>Services: DHCP, DNS, HTTP, SNMP, Syslog</span>
-                </div>
-                <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
-                  Telecharger le fichier .pkt
-                  <ExternalLink className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </motion.div>
