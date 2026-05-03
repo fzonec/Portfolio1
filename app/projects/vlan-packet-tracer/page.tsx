@@ -89,8 +89,16 @@ const levels = [
 // ✅ AJOUTEZ VOS CAPTURES D'ÉCRAN ICI
 // Exemple : { src: "/screenshots/vlan1.png", alt: "Description", caption: "Légende" }
 const screenshots: { src: string; alt: string; caption: string }[] = [
-  // { src: "/screenshots/vlan1.png", alt: "Topologie réseau", caption: "Vue de la topologie complète" },
-  // { src: "/screenshots/vlan2.png", alt: "Configuration VLAN", caption: "Configuration des VLANs" },
+  {
+    src: "/screenshots/vlan-debutant.png",
+    alt: "Topologie réseau débutant",
+    caption: "Niveau Débutant — Cabinet Comptafinance : 2 VLANs, Switch, Serveur DHCP, Imprimante"
+  },
+  {
+    src: "/screenshots/vlan-intermediaire.png",
+    alt: "Topologie réseau intermédiaire",
+    caption: "Niveau Intermédiaire — Société StratAdvise : VLANs RH/Finances/IT, Serveurs DHCP/DNS/HTTP/SNMP"
+  },
 ]
 
 export default function VLANProject() {
